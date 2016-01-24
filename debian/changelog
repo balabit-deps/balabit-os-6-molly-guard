@@ -1,0 +1,222 @@
+molly-guard (0.6.3) unstable; urgency=medium
+
+  * Move pm-utils diverts to /usr/sbin/ (closes: #812535)
+  * Disable pm-utils diverts until #812545 is fixed
+  * Use https for Vcs-Git URL (lintian warning)
+
+ -- Francois Marier <francois@debian.org>  Sun, 24 Jan 2016 12:19:45 -0800
+
+molly-guard (0.6.2) unstable; urgency=medium
+
+  * Add missing diverts for kexec-tools and pm-utils (closes: #797531)
+
+ -- Francois Marier <francois@debian.org>  Mon, 31 Aug 2015 08:10:12 -0700
+
+molly-guard (0.6.1) unstable; urgency=medium
+
+  * Upload to unstable
+  * Run wrap-and-sort
+
+ -- Francois Marier <francois@debian.org>  Sat, 29 Aug 2015 10:34:34 -0700
+
+molly-guard (0.6.0) experimental; urgency=medium
+
+  * Convert to a Debian native package
+  * Merge upstream and Debian changelogs
+  * Switch to a minimal debian/rules
+  * Rely on dh_installman to compress the manpage
+
+  * Add support for mosh (closes: #705397)
+  * Add support for coldreboot from kexec-tools (closes: #735871)
+    Thanks to Daniel Baumann for the patch!
+  * Add support for quotes in shutdown message (closes: #699711)
+  * Add config option to require fully-qualified hostnames (closes: #658282)
+    Thanks to Andrew Pollock for the patch!
+  * Add support for the pm-utils commands (closes: #663655)
+
+ -- Francois Marier <francois@debian.org>  Sun, 23 Aug 2015 11:55:39 -0700
+
+molly-guard (0.5.2-1) unstable; urgency=medium
+
+  [ Josh Triplett ]
+  * New upstream release.
+  * Skip molly-guard's protection logic if we don't have the "tty" command to
+    determine the terminal.  Avoids a spurious failure when invoked without
+    /usr mounted. (Closes: #771572)
+
+  [ Francois Marier ]
+  * Take over maintenance with madduck's blessing
+  * Bump Standards-Version to 3.9.6
+  * Bump debhelper version to 9
+  * Install lintian override with dh_lintian
+  * Use standard template in postrm and preinst scripts
+  * Switch to machine-readable copyright file and add missing copyright holders
+  * Disable pristine-tar in debian/gbp.conf
+  * Add debian/source/format
+  * Update VCS URLs
+  * Fix the lintian overrides
+
+ -- Francois Marier <francois@debian.org>  Sun, 23 Aug 2015 11:22:14 -0700
+
+molly-guard (0.5.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fix and rework prefix and etcdir handling to not embed the build directory
+    in the binary. (Closes: #768418)
+
+ -- Josh Triplett <josh@joshtriplett.org>  Fri, 07 Nov 2014 03:42:41 -0800
+
+molly-guard (0.5-1) unstable; urgency=low
+
+  * New upstream release.
+  * Improve handling for guarded commands that call other guarded commands: if
+    called recursively (detected via MOLLYGUARD_CMD environment variable),
+    unconditionally run the real command.  Suggested by Sam Hartman at
+    DebConf.
+  * Install the molly-guard wrapper script to the same filesystem as the
+    programs that link to it.
+  * Support running the real utilities from a location other than /sbin,
+    determined at build time by passing REALPATH to make.
+  * Support setting an sbindir other than sbin in the prefix; this allows
+    setting a prefix of /usr but an sbindir of /sbin.
+  * Prevent gzip from interactively prompting about overwriting if
+    molly-guard.8.gz already exists.
+  * Drop lintian override for
+    depends-on-essential-package-without-using-version, since molly-guard no
+    longer depends on sysvinit.
+  * Add Enhances for init and systemd.
+  * Use diversions rather than /usr/sbin.  Divert the guarded commands to
+    /lib/molly-guard, and install links in their place, rather than relying on
+    /usr/sbin's position in $PATH.  This avoids installing different files to
+    /sbin and /usr/sbin.  (Closes: #660064)
+  * Add myself as an uploader.
+
+ -- Josh Triplett <josh@joshtriplett.org>  Tue, 26 Aug 2014 10:41:06 -0700
+
+molly-guard (0.4.5-1) unstable; urgency=low
+
+  * New upstream release, which works properly with kFreeBSD
+    (closes: #548099).
+    - remove linuxism /proc/<pid>/fd/0;
+    - add check for ssh in the ancestry of the shell process.
+  * Add Uploader: Ludovico Gardenghi <garden@debian.org>
+  * Bump debhelper compatibility level to 7:
+    - replace dh_clean -k with dh_prep.
+  * Bump Standars-Version to 3.9.3: no other changes required.
+  * Add recommended build-indep and build-arch targets in debian/rules.
+  * Replace $(PWD) with $(CURDIR) in debian/rules.
+
+ -- Ludovico Gardenghi <garden@debian.org>  Fri, 24 Feb 2012 01:02:20 +0100
+
+molly-guard (0.4.4-2) unstable; urgency=low
+
+  * Remove dependency on sysvutils, which is essential, and upstart, which is
+    in experimental still (closes: #488722).
+
+ -- martin f. krafft <madduck@debian.org>  Tue, 01 Jul 2008 15:28:51 +0200
+
+molly-guard (0.4.4-1) unstable; urgency=low
+
+  * New upstream release, which now properly passes arguments to the real
+    commands (closes: #486945).
+
+ -- martin f. krafft <madduck@debian.org>  Thu, 19 Jun 2008 10:17:35 +0200
+
+molly-guard (0.4.3-1) unstable; urgency=low
+
+  * New upstream release, which properly detects sshd sessions, even if
+    ControlMaster is in use.
+
+ -- martin f. krafft <madduck@debian.org>  Sun, 01 Jun 2008 23:20:00 +0200
+
+molly-guard (0.4.2-1) unstable; urgency=low
+
+  * New upstream release, to unstable.
+  * Improved checking for ALWAYS_QUERY_HOSTNAME
+
+ -- martin f. krafft <madduck@debian.org>  Sat, 31 May 2008 16:20:35 +0200
+
+molly-guard (0.4-1~exp.1) experimental; urgency=low
+
+  * New upstream release, thanks a lot to Andrew Ruthven for his input and
+    patches.
+    - use run-parts to allow additional checks to be added easily.
+    - add setting to always molly-guard a host (closes: #470681, #471382).
+    - possibly print out a warning message before taking action
+      (closes: 476508).
+  * Add a molly-guard(8) manpage and migrate the content from README there.
+
+ -- martin f. krafft <madduck@debian.org>  Sat, 19 Apr 2008 15:36:36 +0200
+
+molly-guard (0.3.2-1) unstable; urgency=low
+
+  * New upstream release, which prevent set -u from falling over unset
+    SSH_CONNECTION variable (closes: #471129).
+
+ -- martin f. krafft <madduck@debian.org>  Sun, 16 Mar 2008 08:55:37 +0100
+
+molly-guard (0.3.1-1) unstable; urgency=low
+
+  [ martin f. krafft ]
+  * New upstream release (closes: #469951).
+    - Pass --short option to hostname to prevent the user from having
+      to type the whole FQDN at times.
+    - Check for the $SSH_CONNECTION variable in addition to the pty checks.
+  * Fix Vcs-* links, which now point to the new Git repo.
+  * Bump debhelper compatibility level to 6; no other changes required.
+  * Bump Standards-Version to 3.7.3; no other changes required.
+  * Add a basic README file.
+
+  [ Thijs Kinkhorst ]
+  * Tweak description.
+
+ -- martin f. krafft <madduck@debian.org>  Wed, 12 Mar 2008 19:56:49 +0100
+
+molly-guard (0.3-2) unstable; urgency=low
+
+  * Pass --short option to hostname to prevent the user from having to type
+    the whole FQDN at times (closes: #431205).
+
+ -- martin f. krafft <madduck@debian.org>  Mon, 02 Jul 2007 18:26:09 +0200
+
+molly-guard (0.3-1) unstable; urgency=low
+
+  * Shield shutdown -h; I am terribly sorry, Andrew! (closes: #426107).
+    Now only shutdown -c and * --help are passed through regardless.
+  * Added --help option, which now prints a short molly-guard help message
+    followed by the actual command's help output.
+  * Now should also work in su/sudo sessions because it now checks whether the
+    creator of the current tty/pts is sshd, rather than the brittle check for
+    the environment. Thanks to Craig Small and Don Armstrong for their sparks
+    of brilliance (closes: #425831).
+  * Corrected a typo in the package description (closes: #408706).
+  * Added --pretend-ssh option to facilitate testing.
+
+ -- martin f. krafft <madduck@debian.org>  Sat, 26 May 2007 14:52:57 +0200
+
+molly-guard (0.2.2-1) unstable; urgency=low
+
+  * New upstream release:
+    - now also protects the poweroff command (closes: #401042).
+  * Added missing licence text to copyright file (closes: #399726).
+
+ -- martin f. krafft <madduck@debian.org>  Tue, 12 Dec 2006 12:58:55 +0100
+
+molly-guard (0.2.1-1) unstable; urgency=low
+
+  * New upstream release, which does better shell quoting.
+
+ -- martin f. krafft <madduck@debian.org>  Thu, 19 Oct 2006 18:17:14 +0200
+
+molly-guard (0.2-1) unstable; urgency=low
+
+  * New upstream release, which handles --help related options better.
+
+ -- martin f. krafft <madduck@debian.org>  Thu, 19 Oct 2006 17:27:14 +0200
+
+molly-guard (0.1-1) unstable; urgency=low
+
+  * Initial release
+    (see http://lists.debian.org/debian-devel/2006/10/msg00712.html)
+
+ -- martin f. krafft <madduck@debian.org>  Thu, 19 Oct 2006 11:47:24 +0200

@@ -1,0 +1,8 @@
+molly-guard: binary-without-manpage sbin/coldreboot
+molly-guard: binary-without-manpage sbin/halt
+molly-guard: binary-without-manpage sbin/pm-hibernate
+molly-guard: binary-without-manpage sbin/pm-suspend
+molly-guard: binary-without-manpage sbin/pm-suspend-hybrid
+molly-guard: binary-without-manpage sbin/poweroff
+molly-guard: binary-without-manpage sbin/reboot
+molly-guard: binary-without-manpage sbin/shutdown
